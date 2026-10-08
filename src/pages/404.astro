@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+---
+
+<Base title="Page not found | Struc" noindex>
+  <PageIntro
+    title="This page has moved or doesn't exist"
+    lead="The site was rebuilt recently, so some old links no longer work."
+  >
+    <p class="links">
+      <a href="/">Go to the homepage</a>
+      <a href="/work/">See our work</a>
+    </p>
+  </PageIntro>
+</Base>
+
+<style>
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 32px;
+    margin-top: 28px;
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+</style>

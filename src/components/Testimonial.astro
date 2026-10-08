@@ -1,0 +1,37 @@
+---
+// A verbatim quote on a peach panel. No name, role or organisation is shown.
+interface Props {
+  quote: string;
+}
+
+const { quote } = Astro.props;
+---
+
+<figure class="testimonial">
+  <blockquote><p>"{quote}"</p></blockquote>
+</figure>
+
+<style>
+  .testimonial {
+    padding: 36px 40px;
+    border-radius: var(--radius);
+    background: var(--color-panel);
+  }
+
+  p {
+    color: var(--color-ink);
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 639px) {
+    .testimonial {
+      padding: 24px;
+    }
+
+    p {
+      font-size: 1.125rem;
+    }
+  }
+</style>

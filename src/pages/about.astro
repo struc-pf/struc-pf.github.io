@@ -1,0 +1,169 @@
+---
+import { Image } from 'astro:assets';
+import founder from '../assets/founder.png';
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import RailSection from '../components/RailSection.astro';
+import Prose from '../components/Prose.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="About | Struc"
+  description="Struc is a data consultancy founded by Priscilla Fung, helping purpose-driven organisations build practical, sustainable data systems."
+  rail
+>
+  <PageIntro
+    eyebrow="About"
+    title="Practical data help for organisations with a purpose"
+    lead="Struc is a data consultancy for charities, social enterprises and growing businesses. We turn scattered, underused data into something you can rely on when making decisions."
+  />
+
+  <div class="container">
+    <RailSection title="Why Struc exists">
+      <Prose>
+        <p>
+          Many organisations collect valuable data but struggle to turn it into reliable
+          information. It sits in spreadsheets, third-party systems and sometimes on paper. Much of
+          the advice available assumes a data team and infrastructure that smaller organisations
+          don't have.
+        </p>
+        <p>
+          Struc was founded in 2023 to close that gap. We bring the rigour of large technical
+          organisations and size it for the team you have.
+        </p>
+      </Prose>
+    </RailSection>
+
+    <RailSection title="How we think">
+      <ul class="grid grid-2 principles">
+        <li class="card">
+          <strong>Understand first.</strong> On anything complex we start with discovery. Building
+          before the problem is understood usually means building twice.
+        </li>
+        <li class="card">
+          <strong>The simplest thing that lasts.</strong> We ask what the simplest robust solution is
+          for your organisation and build that, not the most sophisticated thing that is technically
+          possible.
+        </li>
+        <li class="card">
+          <strong>Built to hand over.</strong> Training and documentation are part of the work. The
+          aim is that your team can run it without us.
+        </li>
+        <li class="card">
+          <strong>Plain language.</strong> We work with leaders and front-line staff alike, and
+          explain things in terms of what you need to achieve.
+        </li>
+      </ul>
+    </RailSection>
+
+    <RailSection title="Priscilla Fung, founder">
+      <div class="founder">
+        <Image
+          src={founder}
+          alt={site.founder.name}
+          width={200}
+          height={200}
+          densities={[1, 2]}
+          quality={80}
+        />
+        <Prose>
+          <p>
+            Priscilla is a data consultant with ten years' experience across analytics, data science
+            and data systems.
+          </p>
+          <p>
+            Before founding Struc she worked in large-scale technology environments, including
+            robotics and e-commerce, supporting operational systems across multiple sites and
+            countries. She led the development of data models and dashboards used by hundreds of
+            people in seven countries. That work shaped her practical approach: paying attention not
+            only to how systems are designed, but to how they work day to day.
+          </p>
+          <p>
+            She founded Struc to help purpose-driven organisations make better use of their data,
+            from improving data quality and processes to building measurement frameworks, dashboards
+            and automated systems.
+          </p>
+          <p><a href={site.founder.linkedIn} rel="noopener">Connect on LinkedIn</a></p>
+        </Prose>
+      </div>
+    </RailSection>
+
+    <RailSection title="Experience">
+      <Prose>
+        <ul>
+          <li>
+            <strong>Data systems and automation.</strong> Databases, end-to-end pipelines, system
+            integrations and workflow automation.
+          </li>
+          <li>
+            <strong>Analytics and data science.</strong> Statistical analysis of quantitative and
+            qualitative data to measure impact and support decisions.
+          </li>
+          <li>
+            <strong>Data quality and reporting.</strong> Data audits, cleaning, governance,
+            dashboards and reporting.
+          </li>
+          <li>
+            <strong>Impact measurement.</strong> Monitoring and evaluation, survey design, funder
+            reporting and data for carbon projects.
+          </li>
+          <li>
+            <strong>Training.</strong> Sessions for people at every level of experience with data.
+          </li>
+        </ul>
+        <p class="tools">
+          Python, SQL, dbt, Power BI, Tableau, Looker Studio, Microsoft Fabric, Google Sheets and
+          Excel.
+        </p>
+      </Prose>
+    </RailSection>
+
+    <RailSection title="Working with partners and funders">
+      <Prose>
+        <p>
+          We also work alongside IT companies and funders. For IT companies, we scope data needs and
+          translate business requirements into technical specifications. For funders who want to
+          build capability in the organisations they support, we help shape data projects so that
+          time and money are used well.
+        </p>
+      </Prose>
+    </RailSection>
+  </div>
+</Base>
+
+<style>
+  .principles {
+    padding: 0;
+    list-style: none;
+  }
+
+  .founder {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .founder img {
+    flex: none;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+
+  .tools {
+    font-size: 0.9375rem;
+  }
+
+  @media (max-width: 859px) {
+    .founder {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .founder img {
+      width: 140px;
+      height: 140px;
+    }
+  }
+</style>

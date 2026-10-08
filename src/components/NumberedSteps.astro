@@ -1,0 +1,108 @@
+---
+// Numbered circles joined by a dotted line, each with a short title and one sentence.
+interface Props {
+  steps: { title: string; text: string }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="numbered-steps" style={`--count: ${steps.length}`}>
+  {
+    steps.map((step, index) => (
+      <li>
+        <span class="number" aria-hidden="true">
+          {index + 1}
+        </span>
+        <div>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .numbered-steps {
+    --circle: 44px;
+    display: grid;
+    grid-template-columns: repeat(var(--count), minmax(0, 1fr));
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-inline: 10px;
+    text-align: center;
+  }
+
+  .number {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: var(--circle);
+    height: var(--circle);
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  /* Dotted line from this circle to the next one. */
+  li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: calc(var(--circle) / 2 - 1px);
+    left: calc(50% + var(--circle) / 2 + 6px);
+    width: calc(100% - var(--circle) - 12px);
+    border-top: 2px dotted var(--color-accent);
+  }
+
+  h3 {
+    color: var(--color-accent-text);
+    font-size: 1.125rem;
+  }
+
+  p {
+    margin-top: 4px;
+    font-size: 0.9375rem;
+  }
+
+  @media (max-width: 859px) {
+    .numbered-steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    li {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 0 0 24px;
+      text-align: left;
+    }
+
+    li:last-child {
+      padding-bottom: 0;
+    }
+
+    li:not(:last-child)::after {
+      top: calc(var(--circle) + 6px);
+      bottom: 6px;
+      left: calc(var(--circle) / 2 - 1px);
+      width: 0;
+      border-top: 0;
+      border-left: 2px dotted var(--color-accent);
+    }
+
+    h3 {
+      margin-top: 8px;
+    }
+  }
+</style>

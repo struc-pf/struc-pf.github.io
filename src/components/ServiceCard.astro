@@ -1,0 +1,68 @@
+---
+import ServiceIcon from './ServiceIcon.astro';
+import type { Service } from '../data/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<article class="card service-card">
+  <ServiceIcon name={service.name} />
+  <h3><a href={`/services/#${service.id}`}>{service.name}</a></h3>
+  <p class="quote">{service.quote}</p>
+  <p class="description">{service.description}</p>
+</article>
+
+<style>
+  .service-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+
+  h3 a {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+  }
+
+  /* The whole card is the link target. */
+  h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+  }
+
+  h3 a:focus-visible {
+    outline: none;
+  }
+
+  h3 a:focus-visible::after {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .service-card:hover h3 a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .quote {
+    color: var(--color-accent-text);
+    font-weight: 500;
+  }
+
+  .description {
+    font-size: 0.9375rem;
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+// The four-step approach.
+const steps = [
+  { title: 'Discover', text: 'Understand how things work today before building anything.' },
+  { title: 'Prioritise', text: 'Agree what matters most and what can wait.' },
+  { title: 'Design simply', text: 'Choose the simplest set-up that will last.' },
+  { title: 'Implement', text: 'Build it, train the team and hand it over.' },
+];
+---
+
+<ol class="grid grid-4 steps">
+  {
+    steps.map((step, index) => (
+      <li>
+        <h3>
+          {index + 1}. {step.title}
+        </h3>
+        <p>{step.text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .steps {
+    gap: 20px 32px;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  h3 {
+    color: var(--color-accent-text);
+    font-size: 1.125rem;
+  }
+
+  p {
+    font-size: 0.9375rem;
+  }
+</style>

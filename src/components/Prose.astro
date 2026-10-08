@@ -1,0 +1,41 @@
+---
+// Long-form text for case studies, About and Privacy.
+---
+
+<div class="prose"><slot /></div>
+
+<style>
+  .prose {
+    max-width: 68ch;
+  }
+
+  .prose :global(* + *) {
+    margin-top: 1em;
+  }
+
+  .prose :global(h2) {
+    margin-top: 2em;
+  }
+
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(h3) {
+    margin-top: 1.6em;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.25em;
+  }
+
+  .prose :global(li + li) {
+    margin-top: 0.5em;
+  }
+
+  .prose :global(li::marker) {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+</style>

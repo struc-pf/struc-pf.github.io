@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import founder from '../assets/founder.png';
+import { site } from '../data/site';
+---
+
+<div class="card founder">
+  <Image
+    src={founder}
+    alt={site.founder.name}
+    width={104}
+    height={104}
+    densities={[1, 2]}
+    quality={80}
+  />
+  <div class="text">
+    <h3>{site.founder.name}, founder</h3>
+    <p>
+      Priscilla has worked with data for ten years, from robotics and warehouse automation to
+      charities and social enterprises. She founded Struc in 2023 to bring that experience to
+      organisations without a data team of their own.
+    </p>
+    <p><a class="more" href="/about/">More about Struc</a></p>
+  </div>
+</div>
+
+<style>
+  .founder {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
+  }
+
+  img {
+    flex: none;
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+  }
+
+  .text {
+    display: grid;
+    gap: 6px;
+  }
+
+  .more {
+    display: inline-block;
+    padding-block: 12px;
+  }
+
+  @media (max-width: 639px) {
+    .founder {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px;
+    }
+
+  }
+</style>

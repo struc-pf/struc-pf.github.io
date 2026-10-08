@@ -1,0 +1,95 @@
+---
+// Scattered points joined into one shape. Colours come from the tokens.
+---
+
+<figure class="hero-illustration">
+  <svg
+    viewBox="0 0 600 340"
+    role="img"
+    aria-label="Scattered circles joined by tangled lines become a tidy, connected hexagon"
+  >
+    <g class="tangled lines">
+      <path d="M45 75 C 120 140, 90 60, 170 200"></path>
+      <path d="M125 45 C 60 90, 140 130, 75 175"></path>
+      <path d="M125 45 C 240 120, 100 220, 175 290"></path>
+      <path d="M205 110 C 120 150, 150 260, 50 280"></path>
+      <path d="M75 175 C 30 230, 140 220, 175 290"></path>
+      <path d="M45 75 C 100 20, 170 150, 205 110"></path>
+      <path d="M170 200 C 110 210, 120 300, 50 280"></path>
+    </g>
+    <g class="tangled points">
+      <circle cx="45" cy="75" r="16"></circle>
+      <circle cx="125" cy="45" r="22"></circle>
+      <circle cx="205" cy="110" r="14"></circle>
+      <circle cx="75" cy="175" r="24"></circle>
+      <circle cx="170" cy="200" r="18"></circle>
+      <circle cx="50" cy="280" r="14"></circle>
+      <circle cx="175" cy="290" r="20"></circle>
+    </g>
+    <g class="tidy">
+      <path d="M262 170 H326"></path>
+      <path d="M316 160 L328 170 L316 180"></path>
+    </g>
+    <g class="tidy">
+      <path d="M460 66 L550 118 L550 222 L460 274 L370 222 L370 118 Z"></path>
+      <path d="M460 170 L460 66"></path>
+      <path d="M460 170 L550 118"></path>
+      <path d="M460 170 L550 222"></path>
+      <path d="M460 170 L460 274"></path>
+      <path d="M460 170 L370 222"></path>
+      <path d="M460 170 L370 118"></path>
+    </g>
+    <g class="tidy points">
+      <circle cx="460" cy="66" r="16"></circle>
+      <circle cx="550" cy="118" r="16"></circle>
+      <circle cx="550" cy="222" r="16"></circle>
+      <circle cx="460" cy="274" r="16"></circle>
+      <circle cx="370" cy="222" r="16"></circle>
+      <circle cx="370" cy="118" r="16"></circle>
+    </g>
+    <circle class="tidy centre" cx="460" cy="170" r="24"></circle>
+  </svg>
+  <figcaption>From tangled to structured.</figcaption>
+</figure>
+
+<style>
+  .hero-illustration {
+    width: 100%;
+    max-width: 620px;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    aspect-ratio: 600 / 340;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .tangled {
+    stroke: var(--color-accent);
+  }
+
+  .tidy {
+    stroke: var(--color-logo-teal);
+  }
+
+  .lines {
+    stroke-dasharray: 1 7;
+  }
+
+  .points {
+    fill: var(--color-surface);
+  }
+
+  .centre {
+    fill: var(--color-logo-teal);
+  }
+
+  figcaption {
+    margin-top: 16px;
+    font-size: 0.875rem;
+  }
+</style>
