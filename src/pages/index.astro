@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import HeroIllustration from '../components/HeroIllustration.astro';
+import RailSection from '../components/RailSection.astro';
+import QuoteChip from '../components/QuoteChip.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Steps from '../components/Steps.astro';
+import FounderStrip from '../components/FounderStrip.astro';
+import { site } from '../data/site';
+import { services } from '../data/services';
+import { getPublishedWork } from '../data/work';
+
+const description =
+  "Struc helps charities, social enterprises and growing businesses sort out messy data, build systems their teams can run, and show what's working.";
+
+const featured = (await getPublishedWork()).filter((entry) => entry.data.featured).slice(0, 3);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: `${site.url}/`,
+  logo: `${site.url}/icon-512.png`,
+  email: site.email,
+  sameAs: [site.linkedIn],
+  founder: {
+    '@type': 'Person',
+    name: site.founder.name,
+    sameAs: [site.founder.linkedIn],
+  },
+};
+---
+
+<Base
+  title="Struc: data consultancy for charities and growing businesses"
+  description={description}
+  rail
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(structuredData)} />
+
+  <div class="container hero">
+    <div class="hero-text">
+      <p class="eyebrow">Data consultancy</p>
+      <h1>Make your data useful, without making it complicated</h1>
+      <p class="lead">{description}</p>
+      <div class="actions">
+        <Button href={site.bookingUrl} size="large">Book a free call</Button>
+        <Button href="/work/" variant="link" size="large">See our work</Button>
+      </div>
+    </div>
+    <HeroIllustration />
+  </div>
+
+  <div class="container">
+    <RailSection title="Sound familiar?">
+      <div class="grid grid-3">
+        <QuoteChip>"Our data is scattered across spreadsheets and systems."</QuoteChip>
+        <QuoteChip>"Funders want better evidence than we can give."</QuoteChip>
+        <QuoteChip>"We know it needs sorting, but not where to start."</QuoteChip>
+      </div>
+    </RailSection>
+
+    <RailSection title="What we do">
+      <div class="grid grid-4">
+        {services.map((service) => <ServiceCard service={service} />)}
+      </div>
+    </RailSection>
+
+    <RailSection title="Recent work" linkHref="/work/" linkLabel="All case studies">
+      <div class="grid grid-3">
+        {featured.map((entry) => <CaseStudyCard entry={entry} />)}
+      </div>
+      <div class="after-cards">
+        <Testimonial
+          quote="Priscilla is very good at pitching her data and processing solutions at a level suitable for a small charity like ours, and she has identified our needs and possible solutions very quickly."
+        />
+      </div>
+    </RailSection>
+
+    <RailSection title="How we work">
+      <Steps />
+    </RailSection>
+
+    <RailSection title="Who you'll work with">
+      <FounderStrip />
+    </RailSection>
+  </div>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: 48px;
+    padding-block: 72px 88px;
+  }
+
+  h1,
+  .lead {
+    margin-top: 24px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 28px;
+    margin-top: 32px;
+  }
+
+  .after-cards {
+    margin-top: 20px;
+  }
+
+  @media (max-width: 859px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+      padding-block: 32px 56px;
+    }
+
+    .hero :global(.hero-illustration) {
+      margin-inline: auto;
+    }
+  }
+</style>

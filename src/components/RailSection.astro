@@ -1,0 +1,88 @@
+---
+interface Props {
+  title?: string;
+  id?: string;
+  /** Optional link shown on the right of the heading. */
+  linkHref?: string;
+  linkLabel?: string;
+  /** The last section on the rail: filled circle, no line below it. */
+  last?: boolean;
+}
+
+const { title, id, linkHref, linkLabel, last = false } = Astro.props;
+---
+
+<section class:list={['rail-section', { last }]} id={id}>
+  <div class="rail" aria-hidden="true"><span class="dot"></span></div>
+  <div class="content">
+    {
+      title && (
+        <div class="heading">
+          <h2>{title}</h2>
+          {linkHref && <a href={linkHref}>{linkLabel}</a>}
+        </div>
+      )
+    }
+    <slot />
+  </div>
+</section>
+
+<style>
+  .rail-section {
+    display: grid;
+    grid-template-columns: var(--rail-size) minmax(0, 1fr);
+    column-gap: var(--rail-gap);
+  }
+
+  .rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--rail-offset);
+  }
+
+  .dot {
+    flex: none;
+    width: var(--rail-size);
+    height: var(--rail-size);
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    background: var(--color-bg);
+  }
+
+  /* The dotted line runs from this circle down to the next one. */
+  .rail::after {
+    content: '';
+    flex: 1;
+    border-left: 2px dotted var(--color-accent);
+  }
+
+  .content {
+    padding-bottom: var(--section-gap);
+  }
+
+  .last .dot {
+    background: var(--color-primary);
+  }
+
+  .last .rail::after {
+    content: none;
+  }
+
+  .last .content {
+    padding-bottom: 0;
+  }
+
+  .heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-bottom: 24px;
+  }
+
+  h2 {
+    line-height: 1;
+  }
+</style>

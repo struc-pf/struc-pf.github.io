@@ -1,0 +1,41 @@
+---
+import Button from './Button.astro';
+import { site } from '../data/site';
+---
+
+<section class="band" aria-labelledby="cta-heading">
+  <h2 id="cta-heading">Not sure where to start? Let's talk it through.</h2>
+  <Button href={site.bookingUrl} variant="inverse" size="large">Book a free call</Button>
+</section>
+
+<style>
+  .band {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 48px;
+    border-radius: var(--radius);
+    background: var(--color-primary);
+  }
+
+  h2 {
+    flex: 1 1 400px;
+    color: #fff;
+    font-size: 1.875rem;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 639px) {
+    .band {
+      gap: 20px;
+      padding: 28px 24px;
+    }
+
+    h2 {
+      flex-basis: 100%;
+      font-size: 1.5rem;
+    }
+  }
+</style>

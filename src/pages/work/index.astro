@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import { getPublishedWork } from '../../data/work';
+
+const work = await getPublishedWork();
+---
+
+<Base
+  title="Our work | Struc"
+  description="Examples of Struc's data work with charities, funders, social enterprises and B Corps, from cleaner donor data to automated impact reporting."
+>
+  <PageIntro
+    eyebrow="Our work"
+    title="What this looks like in practice"
+    lead="A few recent projects."
+  />
+
+  <div class="container">
+    <div class="grid grid-3">
+      {work.map((entry) => <CaseStudyCard entry={entry} headingLevel="h2" />)}
+    </div>
+  </div>
+</Base>

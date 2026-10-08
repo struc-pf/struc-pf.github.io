@@ -1,0 +1,38 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+}
+
+const { eyebrow, title, lead } = Astro.props;
+---
+
+<div class="container intro">
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h1>{title}</h1>
+  {lead && <p class="lead">{lead}</p>}
+  <slot />
+</div>
+
+<style>
+  .intro {
+    padding-block: 56px var(--section-gap);
+  }
+
+  h1 {
+    max-width: 22ch;
+    margin-top: 12px;
+  }
+
+  .lead {
+    max-width: 62ch;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 639px) {
+    .intro {
+      padding-top: 32px;
+    }
+  }
+</style>

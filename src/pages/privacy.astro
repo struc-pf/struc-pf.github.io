@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Prose from '../components/Prose.astro';
+import { site } from '../data/site';
+---
+
+<Base title="Privacy | Struc" description="How Struc handles personal information on this website.">
+  <div class="container page">
+    <Prose>
+      <h1>Privacy notice</h1>
+      <p>This website is run by {site.legalName}, company number {site.companyNumber}.</p>
+      <p>
+        <strong>What this site collects.</strong> Nothing. There are no cookies, no analytics and no
+        tracking on this site.
+      </p>
+      <p>
+        <strong>If you email us.</strong> We use your name, email address and anything you tell us to
+        reply and to discuss working together. We keep correspondence for as long as it is useful for
+        that purpose and delete it on request.
+      </p>
+      <p>
+        <strong>If you book a call.</strong> Bookings are handled by Calendly, which collects the
+        details you enter and shares them with us. Calendly's own privacy notice explains how it
+        handles your information.
+      </p>
+      <p>
+        <strong>Hosting.</strong> The site is hosted on GitHub Pages. GitHub may log visitors' IP
+        addresses for security purposes.
+      </p>
+      <p>
+        <strong>Your rights.</strong> You can ask for a copy of the information we hold about you, or
+        ask us to correct or delete it, by emailing
+        <a href={`mailto:${site.email}`}>{site.email}</a>. If you are unhappy with how we have
+        handled your information, you can complain to the Information Commissioner's Office at
+        <a href="https://ico.org.uk" rel="noopener">ico.org.uk</a>.
+      </p>
+    </Prose>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-top: 56px;
+  }
+
+  h1 {
+    margin-bottom: 28px;
+  }
+
+  @media (max-width: 639px) {
+    .page {
+      padding-top: 32px;
+    }
+  }
+</style>

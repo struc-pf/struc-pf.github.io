@@ -1,0 +1,65 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'inverse' | 'link';
+  size?: 'regular' | 'large';
+}
+
+const { href, variant = 'primary', size = 'regular' } = Astro.props;
+const external = /^https?:\/\//.test(href);
+---
+
+<a href={href} class:list={[variant === 'link' ? 'text-link' : 'button', variant, size]} rel={external ? 'noopener' : undefined}>
+  <slot />
+</a>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease;
+  }
+
+  .large {
+    font-size: 1.0625rem;
+  }
+
+  .button.large {
+    min-height: 52px;
+    padding: 14px 28px;
+  }
+
+  .primary {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  .primary:hover {
+    background: var(--color-primary-hover);
+    color: #fff;
+  }
+
+  .inverse {
+    background: #fff;
+    color: var(--color-primary);
+  }
+
+  .inverse:hover {
+    background: var(--color-bg);
+    color: var(--color-primary-hover);
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+</style>

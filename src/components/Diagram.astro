@@ -1,0 +1,113 @@
+---
+// A simple picture of a set-up: boxes in a grid, or boxes joined by arrows ("flow").
+interface Props {
+  layout?: 'flow' | 'grid';
+  items: { name: string; note?: string }[];
+  caption?: string;
+}
+
+const { layout = 'flow', items, caption } = Astro.props;
+---
+
+<figure class="card diagram">
+  <ol class:list={['boxes', layout]}>
+    {
+      items.map((item, index) => (
+        <li>
+          {layout === 'flow' && index > 0 && (
+            <svg class="arrow" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path d="M3 12h17m-6-6 6 6-6 6" />
+            </svg>
+          )}
+          <div class="box">
+            <strong>{item.name}</strong>
+            {item.note && <span>{item.note}</span>}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .diagram {
+    padding: 24px;
+  }
+
+  .boxes {
+    display: flex;
+    gap: 8px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  li {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .box {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    min-height: 64px;
+    height: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .box strong {
+    font-size: 0.9375rem;
+  }
+
+  .arrow {
+    flex: none;
+    fill: none;
+    stroke: var(--color-logo-teal);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  figcaption {
+    max-width: 78ch;
+    margin-top: 20px;
+    font-size: 0.9375rem;
+  }
+
+  @media (max-width: 959px) {
+    .flow {
+      flex-direction: column;
+    }
+
+    .flow li {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .arrow {
+      align-self: center;
+      transform: rotate(90deg);
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import RailSection from '../components/RailSection.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
+import Testimonial from '../components/Testimonial.astro';
+import { services } from '../data/services';
+import { getPublishedWork } from '../data/work';
+
+const work = await getPublishedWork();
+const relatedTo = (slugs: string[]) =>
+  slugs.flatMap((slug) => work.filter((entry) => entry.id === slug));
+---
+
+<Base
+  title="Services | Struc"
+  description="Four ways Struc can help with your data: review what you have, build reliable systems, measure what's working, and flexible ongoing support."
+  rail
+>
+  <PageIntro
+    eyebrow="Services"
+    title="Four ways we can help"
+    lead="Most organisations we work with don't lack data. It's spread across spreadsheets, systems and people's heads, and nobody is sure which version to trust. Where we start depends on where you are."
+  />
+
+  <div class="container">
+    {
+      services.map((service) => {
+        const related = relatedTo(service.related);
+        return (
+          <RailSection title={service.name} id={service.id}>
+            <div class="service">
+              <div class="stack">
+                <p class="quote">
+                  <ServiceIcon name={service.name} />
+                  <span>{service.quote}</span>
+                </p>
+                <p class="lead">{service.summary}</p>
+                <h3>Good for</h3>
+                <p>{service.goodFor}</p>
+                {related.length > 0 && (
+                  <>
+                    <h3>{related.length === 1 ? 'Related case study' : 'Related case studies'}</h3>
+                    <ul class="related">
+                      {related.map((entry) => (
+                        <li>
+                          <a href={`/work/${entry.id}/`}>{entry.data.title}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
+              <div class="card includes">
+                <h3>What you get</h3>
+                <ul>
+                  {service.includes.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+            </div>
+            {service.testimonial && (
+              <div class="service-quote">
+                <Testimonial quote={service.testimonial} />
+              </div>
+            )}
+          </RailSection>
+        );
+      })
+    }
+
+    <RailSection title="Training and workshops">
+      <div class="service">
+        <div class="stack">
+          <p class="lead">
+            Training is part of most projects, and we also run it on its own. Sessions are pitched
+            for mixed levels of experience and for people who don't think of themselves as "data
+            people".
+          </p>
+          <p>Formats: one-to-one sessions, small group workshops, webinars and talks.</p>
+        </div>
+        <div class="card includes">
+          <h3>Topics</h3>
+          <ul>
+            <li>Introduction to data management</li>
+            <li>Introduction to data strategy</li>
+            <li>Hands-on sessions covering spreadsheets, SQL, KPIs, data collection and more</li>
+          </ul>
+        </div>
+      </div>
+    </RailSection>
+
+    <RailSection title="Not sure which fits?">
+      <p class="lead closing-text">
+        Most projects start with a conversation and often combine two or more of these. Tell us
+        what's getting in the way and we'll suggest where to begin.
+      </p>
+    </RailSection>
+  </div>
+</Base>
+
+<style>
+  .service {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 32px 48px;
+  }
+
+  .quote {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-accent-text);
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
+
+  .stack > h3 {
+    margin-top: 28px;
+  }
+
+  .stack > h3 + * {
+    margin-top: 6px;
+  }
+
+  .related {
+    padding: 0;
+    list-style: none;
+  }
+
+  .related a {
+    display: inline-block;
+    padding-block: 4px;
+  }
+
+  .includes {
+    padding: 28px;
+  }
+
+  .includes ul {
+    margin-top: 14px;
+    padding-left: 1.25em;
+  }
+
+  .includes li + li {
+    margin-top: 10px;
+  }
+
+  .includes li::marker {
+    color: var(--color-primary);
+  }
+
+  .service-quote {
+    margin-top: 32px;
+  }
+
+  .closing-text {
+    max-width: 62ch;
+  }
+
+  @media (max-width: 859px) {
+    .service {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
